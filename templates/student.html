@@ -4,4 +4,24 @@
 
 {% block main %}
 <p>这是学生表页</p>
+
+<table border="1">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>学院</th>
+        <th>专业</th>
+    </tr>
+    {% for student in students %}
+    <tr>
+        <td>{{ student.number }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.college }}</td>
+        <td>{{ student.major }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}

@@ -6,4 +6,21 @@
 
 <p>这是课程表页</p>
 
+<table border="1">
+    <tr>
+        <th>课程编号</th>
+        <th>课程名称</th>
+        <th>开办学院</th>
+        <th>任课教师</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+        <td>{{ course.course_order }}</td>
+        <td>{{ course.course_name }}</td>
+        <td>{{ course.college }}</td>
+        <td>{{ course.teacher }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% endblock %}

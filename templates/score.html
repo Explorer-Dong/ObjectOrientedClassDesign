@@ -4,4 +4,23 @@
 
 {% block main %}
 <p>这是分数表页</p>
+
+<table border="1">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>语文</th>
+        <th>数学</th>
+        <th>英语</th>
+    </tr>
+    {% for score in scores %}
+    <tr>
+        <td>{{ score.number }}</td>
+        <td>{{ score.name }}</td>
+        <td>{{ score.chinese }}</td>
+        <td>{{ score.math }}</td>
+        <td>{{ score.english }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
