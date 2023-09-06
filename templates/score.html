@@ -4,6 +4,19 @@
 
 {% block main %}
 
+<script>
+    function confirmDelete(score_number) {
+        if (confirm("确定要删除学号为 " + score_number + " 的分数数据吗？")) {
+            // 发起 AJAX 请求到后端
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/score-delete/" + score_number, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("confirmed=true");
+        }
+    }
+</script>
+
+
 <div>
     <div>
         <!-- 查询的表单 -->
@@ -11,7 +24,7 @@
             <label>
                 <input type="text" name="form_score" placeholder="输入姓名查询成绩" />
                 <input type="submit" value="查询" />
-                <a href="/score-add">录入</a>
+                <a href="/score-add">增加</a>
             </label>
         </form>
 
@@ -39,9 +52,9 @@
                 <td>{{ score.math }}</td>
                 <td>{{ score.english }}</td>
 
-                <!-- scores是一个列表 -->
-                <td><a href="/score-correct/{{ score }}">修改</a></td>
-                <td><a href="/score-delete/{{ score }}" onclick="delete_grade()">删除</a></td>
+                <td><a href="/score-correct/{{ score.number }}">修改</a></td>
+                <td><a href="/score-delete/{{ score.number }}" ,
+                        onclick="return confirmDelete('{{ score.number }}')">删除</a></td>
             </tr>
             {% endfor %}
         </table>
