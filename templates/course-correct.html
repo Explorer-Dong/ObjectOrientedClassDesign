@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>课程修改页</title>
-</head>
+{% block title %}学生表{% endblock %}
 
-<body>
+{% block main %}
+<div class="container mt-4">
     <form action="" method="post">
-        <table>
+        <table class="table">
             <caption>修改课程信息（课程号不可修改）</caption>
             <tr>
                 <td>课程名称</td>
@@ -17,13 +13,12 @@
                 <td>任课教师</td>
             </tr>
             <tr>
-                <td><input name="course_name" placeholder="修改的课程名称" type="text" /></td>
-                <td><input name="college" placeholder="修改的开办学院" type="text" /></td>
-                <td><input name="teacher" placeholder="修改的任课教师" type="text" /></td>
-                <td><input type="submit" value="提交修改" /></td>
+                <td><input name="course_name" placeholder="修改的课程名称" type="text" class="form-control" /></td>
+                <td><input name="college" placeholder="修改的开办学院" type="text" class="form-control" /></td>
+                <td><input name="teacher" placeholder="修改的任课教师" type="text" class="form-control" /></td>
+                <td><input type="submit" value="提交修改" class="btn btn-primary" /></td>
             </tr>
         </table>
     </form>
-</body>
-
-</html>
+</div>
+{% endblock %}

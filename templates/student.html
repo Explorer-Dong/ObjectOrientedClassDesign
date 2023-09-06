@@ -4,61 +4,56 @@
 
 {% block main %}
 
-<script>
-	function confirmDelete(student_id) {
-		if (confirm("确定要删除学号为 " + student_id + " 的学生数据吗？")) {
-			// 发起 AJAX 请求到后端
-			var xhr = new XMLHttpRequest();
-			xhr.open("POST", "/student-delete/" + student_id, true);
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send("confirmed=true");
-		}
-	}
-</script>
+<div class="container mt-4">
+    <div class="row justify-content-end">
+        <div class="col-md-4">
+            <form action="" method="post" class="d-flex">
+                <input type="text" name="form_student" placeholder="输入姓名查询成绩" class="form-control me-2" />
+                <input type="submit" value="查询" class="btn btn-primary" />
+                <a href="/student-add" class="btn btn-secondary ms-2">增加</a>
+            </form>
+        </div>
+    </div>
 
-
-<div>
-	<div>
-		<!-- 查询的表单 -->
-		<form action="" method="post">
-			<label>
-				<input type="text" name="form_student" placeholder="输入学生姓名查询成绩" />
-				<input type="submit" value="查询" />
-				<a href="/student-add">增加</a>
-			</label>
-		</form>
-
-		{% if name_keyword == "" %}
-		<p>请重新输入</p>
-		{% elif students == [] %}
-		<p>查无此人</p>
-		{% else %}
-		<table>
-			<caption>学生表 共{{ students | length }}条记录</caption>
-			<tr>
-				<td>学号</td>
-				<td>姓名</td>
-				<td>年龄</td>
-				<td>学院</td>
-				<td>专业</td>
-				<td>修改操作</td>
-				<td>删除操作</td>
-			</tr>
-			{% for student in students %}
-			<tr>
-				<td>{{ student.number }}</td>
-				<td>{{ student.name }}</td>
-				<td>{{ student.age }}</td>
-				<td>{{ student.college }}</td>
-				<td>{{ student.major }}</td>
-				<td><a href="/student-correct/{{ student.number }}">修改</a></td>
-				<td><a href="/student-delete/{{ student.number }}" ,
-						onclick="return confirmDelete('{{ student.number }}')">删除</a></td>
-			</tr>
-			{% endfor %}
-		</table>
-		{% endif %}
-	</div>
+    {% if name_keyword == "" %}
+    <p>请重新输入</p>
+    {% elif students == [] %}
+    <p>查无此人</p>
+    {% else %}
+    <div class="row mt-4">
+        <div class="col">
+            <table class="table table-striped">
+                <caption>学生表 共{{ students | length }}条记录</caption>
+                <thead class="thead-light">
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>学院</th>
+                        <th>专业</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.number }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.age }}</td>
+                        <td>{{ student.college }}</td>
+                        <td>{{ student.major }}</td>
+                        <td>
+                            <a href="/student-correct/{{ student.number }}" class="btn btn-info btn-sm">修改</a>
+                            <a href="/student-delete/{{ student.number }}" class="btn btn-danger btn-sm"
+                                onclick="return confirmDelete('{{ student.number }}')">删除</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

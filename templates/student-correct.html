@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>学生信息修改页</title>
-</head>
+{% block title %}学生表{% endblock %}
 
-<body>
+{% block main %}
+<div class="container mt-4">
     <form action="" method="post">
-        <table>
+        <table class="table">
             <caption>修改学生信息（学号不可修改）</caption>
             <tr>
-                <td>姓名</td>
-                <td>年龄</td>
-                <td>学院</td>
-                <td>专业</td>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th></th>
             </tr>
             <tr>
-                <td><input name="name" placeholder="修改的姓名" type="text" /></td>
-                <td><input name="age" placeholder="修改的年龄" type="text" /></td>
-                <td><input name="college" placeholder="修改的学院" type="text" /></td>
-                <td><input name="major" placeholder="修改的专业" type="text" /></td>
-                <td><input type="submit" value="提交修改" /></td>
+                <td><input name="name" placeholder="修改的姓名" type="text" class="form-control" /></td>
+                <td><input name="age" placeholder="修改的年龄" type="text" class="form-control" /></td>
+                <td><input name="college" placeholder="修改的学院" type="text" class="form-control" /></td>
+                <td><input name="major" placeholder="修改的专业" type="text" class="form-control" /></td>
+                <td><input type="submit" value="提交修改" class="btn btn-primary" /></td>
             </tr>
         </table>
     </form>
-</body>
-
-</html>
+</div>
+{% endblock %}

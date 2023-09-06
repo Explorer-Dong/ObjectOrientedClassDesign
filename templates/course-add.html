@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>课程表添加页</title>
-</head>
+{% block title %}课程表添加页{% endblock %}
 
-<body>
-    <div>
-        <form action="" method="post">
-            <table>
-                <caption>录入课程信息</caption>
-                <tr>
-                    <td>课程编号</td>
-                    <td>课程名称</td>
-                    <td>开办学院</td>
-                    <td>任课教师</td>
-                </tr>
-                <tr>
-                    <td><input name="course_order" placeholder="请输入课程编号" type="text" /></td>
-                    <td><input name="course_name" placeholder="请输入课程名称" type="text" /></td>
-                    <td><input name="college" placeholder="请输入开办学院" type="text" /></td>
-                    <td><input name="teacher" placeholder="请输入任课教师" type="text" /></td>
-                    <td><input type="submit" value="提交" /></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</body>
-
-</html>
+{% block main %}
+<div class="container mt-4">
+    <form action="" method="post">
+        <table class="table">
+            <caption>录入课程信息</caption>
+            <tr>
+                <th>课程编号</th>
+                <th>课程名称</th>
+                <th>开办学院</th>
+                <th>任课教师</th>
+            </tr>
+            <tr>
+                <td><input name="course_order" placeholder="请输入课程编号" type="text" class="form-control" /></td>
+                <td><input name="course_name" placeholder="请输入课程名称" type="text" class="form-control" /></td>
+                <td><input name="college" placeholder="请输入开办学院" type="text" class="form-control" /></td>
+                <td><input name="teacher" placeholder="请输入任课教师" type="text" class="form-control" /></td>
+                <td><input type="submit" value="提交" class="btn btn-primary" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

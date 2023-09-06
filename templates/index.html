@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="zh">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}首页{% endblock %}</title>
-</head>
+{% block title %}首页{% endblock %}
 
-<body>
-    <div>
-        <ul>
-            <li><a href="{{ url_for('course.course') }}">课程表</a></li>
-            <li><a href="{{ url_for('student.student') }}">学生表</a></li>
-            <li><a href="{{ url_for('score.score') }}">分数表</a></li>
-        </ul>
+{% block main %}
+
+<div class="container text-center mt-5">
+    <h1 class="mb-4">欢迎来到教务管理系统:)</h1>
+
+    <div class="d-grid gap-3">
+        <a href="{{ url_for('course.course') }}" class="btn btn-primary btn-lg"
+            style="width: max-content; padding: 10px 20px; margin: 0 auto;">课程表</a>
+        <a href="{{ url_for('student.student') }}" class="btn btn-primary btn-lg"
+            style="width: max-content; padding: 10px 20px; margin: 0 auto;">学生表</a>
+        <a href="{{ url_for('score.score') }}" class="btn btn-primary btn-lg"
+            style="width: max-content; padding: 10px 20px; margin: 0 auto;">分数表</a>
     </div>
-</body>
+</div>
 
-</html>
+{% endblock %}
