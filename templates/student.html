@@ -16,15 +16,15 @@
         </div>
     </div>
 
-    {% if name_keyword == "" %}
+    {% if keyword == "" %}
     <p>请重新输入</p>
-    {% elif students == [] %}
-    <p>查无此人</p>
+    {% elif items == [] %}
+    <p>无查询结果，请重新输入</p>
     {% else %}
     <div class="row mt-4">
         <div class="col">
             <table class="table table-striped">
-                <caption>学生表 共{{ students | length }}条记录</caption>
+                <caption>学生表 共{{ items | length }}条记录</caption>
                 <thead class="thead-light">
                     <tr>
                         <th>学号</th>
@@ -36,17 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for student in students %}
+                    {% for item in items %}
                     <tr>
-                        <td>{{ student.number }}</td>
-                        <td>{{ student.name }}</td>
-                        <td>{{ student.age }}</td>
-                        <td>{{ student.college }}</td>
-                        <td>{{ student.major }}</td>
+                        <td>{{ item.number }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.age }}</td>
+                        <td>{{ item.college }}</td>
+                        <td>{{ item.major }}</td>
                         <td>
-                            <a href="/student-correct/{{ student.number }}" class="btn btn-info btn-sm">修改</a>
-                            <a href="/student-delete/{{ student.number }}" class="btn btn-danger btn-sm"
-                                onclick="return confirm_delete_student('{{ student.number }}')">删除</a>
+                            <a href="/student-correct/{{ item.number }}" class="btn btn-info btn-sm">修改</a>
+                            <a href="/student-delete/{{ item.number }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm_delete_student('{{ item.number }}')">删除</a>
                         </td>
                     </tr>
                     {% endfor %}

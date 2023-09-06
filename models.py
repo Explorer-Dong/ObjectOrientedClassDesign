@@ -3,8 +3,8 @@ from exts import db
 
 class Course(db.Model):
     __tablename__ = "course"
-    course_order = db.Column(db.String(10), primary_key=True)
-    course_name = db.Column(db.String(20))
+    number = db.Column(db.String(10), primary_key=True)
+    name = db.Column(db.String(20))
     college = db.Column(db.String(20))
     teacher = db.Column(db.String(15))
 

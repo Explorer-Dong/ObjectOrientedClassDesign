@@ -16,10 +16,10 @@ function confirm_delete_score(score_number) {
   }
 }
 
-function confirm_delete_course(course_order) {
-  if (confirm("确定要删除编号为 " + course_order + " 的课程数据吗？")) {
+function confirm_delete_course(course_number) {
+  if (confirm("确定要删除编号为 " + course_number + " 的课程数据吗？")) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/course-delete/" + course_order, true);
+    xhr.open("POST", "/course-delete/" + course_number, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send("confirmed=true");
   }

@@ -9,22 +9,22 @@
     <div class="row justify-content-end">
         <div class="col-md-4">
             <form action="" method="post" class="d-flex">
-                <input type="text" name="form_student" placeholder="输入课程名称查询成绩" class="form-control me-2" />
+                <input type="text" name="form_course" placeholder="输入课程名称查询成绩" class="form-control me-2" />
                 <input type="submit" value="查询" class="btn btn-primary" />
                 <a href="/course-add" class="btn btn-secondary ms-2">增加</a>
             </form>
         </div>
     </div>
 
-    {% if name_keyword == "" %}
+    {% if keyword == "" %}
     <p>请重新输入</p>
-    {% elif students == [] %}
-    <p>查无此人</p>
+    {% elif items == [] %}
+    <p>无查询结果，请重新输入</p>
     {% else %}
     <div class="row mt-4">
         <div class="col">
             <table class="table table-striped">
-                <caption>课程表 共{{ courses | length }}条记录</caption>
+                <caption>课程表 共{{ items | length }}条记录</caption>
                 <thead class="thead-light">
                     <tr>
                         <th>课程编号</th>
@@ -35,16 +35,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for course in courses %}
+                    {% for course in items %}
                     <tr>
-                        <td>{{ course.course_order }}</td>
-                        <td>{{ course.course_name }}</td>
+                        <td>{{ course.number }}</td>
+                        <td>{{ course.name }}</td>
                         <td>{{ course.college }}</td>
                         <td>{{ course.teacher }}</td>
                         <td>
-                            <a href="/course-correct/{{ course.course_order }}" class="btn btn-info btn-sm">修改</a>
-                            <a href="/course-delete/{{ course.course_order }}" class="btn btn-danger btn-sm"
-                                onclick="return confirm_delete_course('{{ course.course_order }}')">删除</a>
+                            <a href="/course-correct/{{ course.number }}" class="btn btn-info btn-sm">修改</a>
+                            <a href="/course-delete/{{ course.number }}" class="btn btn-danger btn-sm"
+                                onclick="return confirm_delete_course('{{ course.number }}')">删除</a>
                         </td>
                     </tr>
                     {% endfor %}

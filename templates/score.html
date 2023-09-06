@@ -16,15 +16,15 @@
         </div>
     </div>
 
-    {% if name_keyword == "" %}
+    {% if keyword == "" %}
     <p>请重新输入</p>
-    {% elif scores == [] %}
-    <p>查无此人</p>
+    {% elif items == [] %}
+    <p>无查询结果，请重新输入</p>
     {% else %}
     <div class="row mt-4">
         <div class="col">
             <table class="table table-striped">
-                <caption>成绩表 共{{ scores | length }}条记录</caption>
+                <caption>分数表 共{{ items | length }}条记录</caption>
                 <thead class="thead-light">
                     <tr>
                         <th>学号</th>
@@ -36,18 +36,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for score in scores %}
+                    {% for item in items %}
                     <tr>
-                        <td>{{ score.number }}</td>
-                        <td>{{ score.name }}</td>
-                        <td>{{ score.chinese }}</td>
-                        <td>{{ score.math }}</td>
-                        <td>{{ score.english }}</td>
+                        <td>{{ item.number }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.chinese }}</td>
+                        <td>{{ item.math }}</td>
+                        <td>{{ item.english }}</td>
 
                         <td>
-                            <a href="/score-correct/{{ score.number }}" class="btn btn-info btn-sm">修改</a>
-                            <a href="/score-delete/{{ score.number }}" class="btn btn-danger btn-sm" ,
-                                onclick="return confirm_delete_score('{{ score.number }}')">删除</a>
+                            <a href="/score-correct/{{ item.number }}" class="btn btn-info btn-sm">修改</a>
+                            <a href="/score-delete/{{ item.number }}" class="btn btn-danger btn-sm" ,
+                                onclick="return confirm_delete_score('{{ item.number }}')">删除</a>
                         </td>
                     </tr>
                     {% endfor %}
