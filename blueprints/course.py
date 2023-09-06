@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect
+from flask import Blueprint, request, render_template, redirect, url_for
 from exts import db
 from models import Course
 
@@ -35,7 +35,7 @@ def course_add():
         course = Course(course_order=course_order, course_name=course_name, college=college, teacher=teacher)
         db.session.add(course)
         db.session.commit()
-        return redirect("/course/")
+        return redirect(url_for("course.course"))
     
 
 # 课程表：删除，传入的参数是课程号
@@ -46,7 +46,7 @@ def course_delete(course_order):
             course = Course.query.filter(Course.course_order == course_order).first()
             db.session.delete(course)
             db.session.commit()
-    return redirect("/course/")
+    return redirect(url_for("course.course"))
 
 
 # 课程表：修改，传入的参数是课程号
@@ -66,4 +66,4 @@ def course_correct(course_order):
         old_course.teacher = new_teacher
 
         db.session.commit()
-        return redirect("/course/")
+        return redirect(url_for("course.course"))

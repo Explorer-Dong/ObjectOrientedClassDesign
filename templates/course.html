@@ -5,6 +5,7 @@
 {% block main %}
 
 <div class="container mt-4">
+
     <div class="row justify-content-end">
         <div class="col-md-4">
             <form action="" method="post" class="d-flex">
@@ -14,7 +15,6 @@
             </form>
         </div>
     </div>
-
 
     {% if name_keyword == "" %}
     <p>请重新输入</p>
@@ -44,7 +44,7 @@
                         <td>
                             <a href="/course-correct/{{ course.course_order }}" class="btn btn-info btn-sm">修改</a>
                             <a href="/course-delete/{{ course.course_order }}" class="btn btn-danger btn-sm"
-                                onclick="return confirmDelete('{{ course.course_order }}')">删除</a>
+                                onclick="return confirm_delete_course('{{ course.course_order }}')">删除</a>
                         </td>
                     </tr>
                     {% endfor %}
