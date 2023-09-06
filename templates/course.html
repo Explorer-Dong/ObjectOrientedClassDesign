@@ -4,23 +4,62 @@
 
 {% block main %}
 
-<p>这是课程表页</p>
+<script>
 
-<table border="1">
-    <tr>
-        <th>课程编号</th>
-        <th>课程名称</th>
-        <th>开办学院</th>
-        <th>任课教师</th>
-    </tr>
-    {% for course in courses %}
-    <tr>
-        <td>{{ course.course_order }}</td>
-        <td>{{ course.course_name }}</td>
-        <td>{{ course.college }}</td>
-        <td>{{ course.teacher }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    function confirmDelete(course_order) {
+        if (confirm("确定要删除课程编号为 " + course_order + " 的课程数据吗？")) {
+            // 发起 AJAX 请求到后端
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/course-delete/" + course_order, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("confirmed=true");
+        }
+    }
+</script>
+
+
+<div>
+    <div>
+        <!-- 查询的表单 -->
+        <form action="" method="post">
+            <label>
+                <input type="text" name="form_course" placeholder="输入课程名称查询成绩" />
+                <input type="submit" value="查询" />
+                <a href="/course-add">增加</a>
+            </label>
+        </form>
+
+
+        {% if name_keyword == "" %}
+        <p>请重新输入</p>
+        {% elif courses == [] %}
+        <p>查无此人</p>
+        {% else %}
+        <table>
+            <caption>课程表 共{{ courses | length }}条记录</caption>
+            <tr>
+                <td>课程编号</td>
+                <td>课程名称</td>
+                <td>开办学院</td>
+                <td>任课教师</td>
+                <td>修改操作</td>
+                <td>删除操作</td>
+            </tr>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.course_order }}</td>
+                <td>{{ course.course_name }}</td>
+                <td>{{ course.college }}</td>
+                <td>{{ course.teacher }}</td>
+                <td><a href="/course-correct/{{ course.course_order }}">修改</a></td>
+                <td><a href="/course-delete/{{ course.course_order }}" ,
+                        onclick="return confirmDelete('{{ course.course_order }}')">删除</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+
 
 {% endblock %}
