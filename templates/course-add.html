@@ -3,6 +3,12 @@
 {% block title %}课程表添加页{% endblock %}
 
 {% block main %}
+
+<!-- self -->
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
 <div class="container mt-4">
     <form action="" method="post">
         <table class="table">
@@ -23,4 +29,6 @@
         </table>
     </form>
 </div>
+<!-- end self -->
+
 {% endblock %}

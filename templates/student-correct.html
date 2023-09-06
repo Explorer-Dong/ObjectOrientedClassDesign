@@ -3,6 +3,12 @@
 {% block title %}学生表{% endblock %}
 
 {% block main %}
+
+<!-- self -->
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
 <div class="container mt-4">
     <form action="" method="post">
         <table class="table">
@@ -24,4 +30,6 @@
         </table>
     </form>
 </div>
+<!-- endself -->
+
 {% endblock %}

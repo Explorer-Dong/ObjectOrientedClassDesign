@@ -3,6 +3,12 @@
 {% block title %}分数增加页面{% endblock %}
 
 {% block main %}
+
+<!-- self -->
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
+
 <div class="container mt-4">
     <form action="" method="post">
         <table class="table">
@@ -26,4 +32,6 @@
         </table>
     </form>
 </div>
+<!-- endself -->
+
 {% endblock %}

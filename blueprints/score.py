@@ -1,19 +1,23 @@
 from models import Score
-
 from .base_module import BaseModule
+
 
 class ScoreModule(BaseModule):
     def __init__(self):
         super().__init__("score", __name__, url_prefix="/")
 
+
     def score(self):
         return self.search_items(Score, Score.name, "form_score", "score.html")
+
 
     def score_add(self):
         return self.add_item(Score, "score-add.html")
 
+
     def score_delete(self, number):
         return self.delete_item(Score, number)
+
 
     def score_correct(self, number):
         return self.correct_item(Score, "score-correct.html", number)
