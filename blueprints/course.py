@@ -1,30 +1,26 @@
 from models import Course
-from flask import request
 
 from .base_module import BaseModule
 
-bp = BaseModule("course", __name__, url_prefix="/")
+class CourseModule(BaseModule):
+    def __init__(self):
+        super().__init__("course", __name__, url_prefix="/")
 
+    def course(self):
+        return self.search_items(Course, Course.name, "form_course", "course.html")
 
-@bp.route("/course/", methods=["GET", "POST"])
-def course():
-	# 模型类，搜索字段，表单名，模板名
-	return bp.search_items(Course, Course.name, "form_course", "course.html")
+    def course_add(self):
+        return self.add_item(Course, "course-add.html")
 
+    def course_delete(self, number):
+        return self.delete_item(Course, number)
 
-@bp.route("/course-add/", methods=["GET", "POST"])
-def course_add():
-	# 模型类，增加界面模板名
-	return bp.add_item(Course, "course-add.html")
+    def course_correct(self, number):
+        return self.correct_item(Course, "course-correct.html", number)
 
+bp = CourseModule()
 
-@bp.route("/course-delete/<string:number>", methods=["GET", "POST"])
-def course_delete(number):
-	# 模型类，目标
-	return bp.delete_item(Course, number)
-
-
-@bp.route("/course-correct/<string:number>", methods=["GET", "POST"])
-def course_correct(number):
-	# 模型类，修改界面模板名，目标
-	return bp.correct_item(Course, "course-correct.html", number)
+bp.add_url_rule("/course/", view_func=bp.course, methods=["GET", "POST"])
+bp.add_url_rule("/course-add/", view_func=bp.course_add, methods=["GET", "POST"])
+bp.add_url_rule("/course-delete/<string:number>", view_func=bp.course_delete, methods=["GET", "POST"])
+bp.add_url_rule("/course-correct/<string:number>", view_func=bp.course_correct, methods=["GET", "POST"])

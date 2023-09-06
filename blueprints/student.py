@@ -1,30 +1,26 @@
 from models import Student
-from flask import request
 
 from .base_module import BaseModule
 
-bp = BaseModule("student", __name__, url_prefix="/")
+class StudentModule(BaseModule):
+    def __init__(self):
+        super().__init__("student", __name__, url_prefix="/")
 
+    def student(self):
+        return self.search_items(Student, Student.name, "form_student", "student.html")
 
-@bp.route("/student/", methods=["GET", "POST"])
-def student():
-    # 模型类，搜索字段，表单名，模板名
-    return bp.search_items(Student, Student.name, "form_student", "student.html")
+    def student_add(self):
+        return self.add_item(Student, "student-add.html")
 
+    def student_delete(self, number):
+        return self.delete_item(Student, number)
 
-@bp.route("/student-add/", methods=["GET", "POST"])
-def student_add():
-    # 模型类，增加界面模板名
-    return bp.add_item(Student, "student-add.html")
+    def student_correct(self, number):
+        return self.correct_item(Student, "student-correct.html", number)
 
+bp = StudentModule()
 
-@bp.route("/student-delete/<string:number>", methods=["GET", "POST"])
-def student_delete(number):
-    # 模型类，目标
-    return bp.delete_item(Student, number)
-
-
-@bp.route("/student-correct/<string:number>", methods=["GET", "POST"])
-def student_correct(number):
-    # 模型类，修改界面模板名，目标
-    return bp.correct_item(Student, "student-correct.html", number)
+bp.add_url_rule("/student/", view_func=bp.student, methods=["GET", "POST"])
+bp.add_url_rule("/student-add/", view_func=bp.student_add, methods=["GET", "POST"])
+bp.add_url_rule("/student-delete/<string:number>", view_func=bp.student_delete, methods=["GET", "POST"])
+bp.add_url_rule("/student-correct/<string:number>", view_func=bp.student_correct, methods=["GET", "POST"])

@@ -9,8 +9,10 @@ from blueprints.student import bp as studednt_bp
 # 实例化一个flask对象
 app = Flask(__name__)
 
-# 配置这个flask对象：数据库 and ...
+
+# 配置这个flask对象：数据库
 app.config.from_object(config)
+
 
 # 以当前flask对象实例化一个ORM模型 db
 db.init_app(app)

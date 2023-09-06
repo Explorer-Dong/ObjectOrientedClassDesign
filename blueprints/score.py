@@ -1,30 +1,26 @@
 from models import Score
-from flask import request
 
 from .base_module import BaseModule
 
-bp = BaseModule("score", __name__, url_prefix="/")
+class ScoreModule(BaseModule):
+    def __init__(self):
+        super().__init__("score", __name__, url_prefix="/")
 
+    def score(self):
+        return self.search_items(Score, Score.name, "form_score", "score.html")
 
-@bp.route("/score/", methods=["GET", "POST"])
-def score():
-    # 模型类，搜索字段，表单名，模板名
-    return bp.search_items(Score, Score.name, "form_score", "score.html")
+    def score_add(self):
+        return self.add_item(Score, "score-add.html")
 
+    def score_delete(self, number):
+        return self.delete_item(Score, number)
 
-@bp.route("/score-add/", methods=["GET", "POST"])
-def score_add():
-    # 模型类，增加界面模板名
-    return bp.add_item(Score, "score-add.html")
+    def score_correct(self, number):
+        return self.correct_item(Score, "score-correct.html", number)
 
+bp = ScoreModule()
 
-@bp.route("/score-delete/<string:number>", methods=["GET", "POST"])
-def score_delete(number):
-    # 模型类，目标
-    return bp.delete_item(Score, number)
-
-
-@bp.route("/score-correct/<string:number>", methods=["GET", "POST"])
-def score_correct(number):
-    # 模型类，修改界面模板名，目标
-    return bp.correct_item(Score, "score-correct.html", number)
+bp.add_url_rule("/score/", view_func=bp.score, methods=["GET", "POST"])
+bp.add_url_rule("/score-add/", view_func=bp.score_add, methods=["GET", "POST"])
+bp.add_url_rule("/score-delete/<string:number>", view_func=bp.score_delete, methods=["GET", "POST"])
+bp.add_url_rule("/score-correct/<string:number>", view_func=bp.score_correct, methods=["GET", "POST"])

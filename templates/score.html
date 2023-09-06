@@ -24,7 +24,11 @@
     <div class="row mt-4">
         <div class="col">
             <table class="table table-striped">
-                <caption>分数表 共{{ items | length }}条记录</caption>
+                <caption>
+                    {% set text = '<span class="highlight">分数表</span>' %}
+                    {{ text | safe }}
+                    共{{ items | length }}条记录
+                </caption>
                 <thead class="thead-light">
                     <tr>
                         <th>学号</th>
