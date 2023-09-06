@@ -8,6 +8,7 @@ class BaseModule(Blueprint):
         super().__init__(name, import_name, url_prefix=url_prefix)
 
 
+    # 展示图表 | 搜索数据
     def search_items(self, model, search_column, form_name, template_name):
         if request.method == "GET":
             items = model.query.all()
@@ -36,6 +37,7 @@ class BaseModule(Blueprint):
                     return render_template(template_name, items=items, keyword=keyword)
 
 
+    # 增加数据
     def add_item(self, model, template_name):
         if request.method == "GET":
             return render_template(template_name)
@@ -65,6 +67,7 @@ class BaseModule(Blueprint):
             return redirect(url_for(f"{model.__tablename__}.{model.__tablename__}"))
 
 
+    # 删除数据
     def delete_item(self, model, target):
         if request.method == "POST":
             if request.form.get("confirmed") == "true":
@@ -75,6 +78,7 @@ class BaseModule(Blueprint):
         return redirect(url_for(f"{model.__tablename__}.{model.__tablename__}"))
 
 
+    # 修正数据
     def correct_item(self, model, template_name, target):
         if request.method == "GET":
             return render_template(template_name)
@@ -93,4 +97,5 @@ class BaseModule(Blueprint):
                 setattr(item, key, cleaned_value)
 
             db.session.commit()
+            
             return redirect(url_for(f"{model.__tablename__}.{model.__tablename__}"))

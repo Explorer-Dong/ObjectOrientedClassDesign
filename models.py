@@ -25,3 +25,11 @@ class Student(db.Model):
     age = db.Column(db.Integer)
     college = db.Column(db.String(10))
     major = db.Column(db.String(10))
+
+
+# 邮箱 | 验证码进行相互绑定
+class EmailVerification(db.Model):
+    __tablename__ = "email_verification"
+    number = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    email = db.Column(db.String(50), nullable=False)
+    verification = db.Column(db.String(10), nullable=False)

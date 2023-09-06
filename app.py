@@ -5,6 +5,7 @@ from blueprints.course import bp as course_bp
 from blueprints.score import bp as score_bp
 from blueprints.student import bp as studednt_bp
 from blueprints.auth import bp as auth_bp
+from flask_migrate import Migrate
 
 
 # 实例化一个flask对象
@@ -20,11 +21,16 @@ db.init_app(app)
 mail.init_app(app)
 
 
+# 将ORM模型与数据库进行同步
+migrate = Migrate(app, db)
+
+
 # 绑定不同模块对应的蓝图，即视图函数
 app.register_blueprint(course_bp)
 app.register_blueprint(score_bp)
 app.register_blueprint(studednt_bp)
 app.register_blueprint(auth_bp)
+
 
 # 主页
 @app.route("/")
