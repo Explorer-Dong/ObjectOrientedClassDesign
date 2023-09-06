@@ -3,24 +3,51 @@
 {% block title %}分数表{% endblock %}
 
 {% block main %}
-<p>这是分数表页</p>
 
-<table border="1">
-    <tr>
-        <th>学号</th>
-        <th>姓名</th>
-        <th>语文</th>
-        <th>数学</th>
-        <th>英语</th>
-    </tr>
-    {% for score in scores %}
-    <tr>
-        <td>{{ score.number }}</td>
-        <td>{{ score.name }}</td>
-        <td>{{ score.chinese }}</td>
-        <td>{{ score.math }}</td>
-        <td>{{ score.english }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div>
+    <div>
+        <!-- 查询的表单 -->
+        <form action="" method="post">
+            <label>
+                <input type="text" name="form_score" placeholder="输入姓名查询成绩" />
+                <input type="submit" value="查询" />
+                <a href="/score-add">录入</a>
+            </label>
+        </form>
+
+        {% if name_keyword == "" %}
+        <p>请重新输入</p>
+        {% elif scores == [] %}
+        <p>查无此人</p>
+        {% else %}
+        <table>
+            <caption>成绩表 共{{ scores | length }}条记录</caption>
+            <tr>
+                <td>学号</td>
+                <td>姓名</td>
+                <td>语文</td>
+                <td>数学</td>
+                <td>英语</td>
+                <td>修改操作</td>
+                <td>删除操作</td>
+            </tr>
+            {% for score in scores %}
+            <tr>
+                <td>{{ score.number }}</td>
+                <td>{{ score.name }}</td>
+                <td>{{ score.chinese }}</td>
+                <td>{{ score.math }}</td>
+                <td>{{ score.english }}</td>
+
+                <!-- scores是一个列表 -->
+                <td><a href="/score-correct/{{ score }}">修改</a></td>
+                <td><a href="/score-delete/{{ score }}" onclick="delete_grade()">删除</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+</div>
+
 {% endblock %}

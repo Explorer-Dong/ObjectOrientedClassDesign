@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask import redirect
 
 app = Flask(__name__)
 
@@ -48,13 +49,20 @@ def course():
         return render_template("course.html")
 
 
+# 分数表：主页 + 搜索
 @app.route("/score", methods=["GET", "POST"])
 def score():
     if request.method == "GET":
         scores = Score.query.all()
         return render_template("score.html", scores=scores)
     else:
-        return render_template("score.html")
+        name_keyword = request.form.get("form_score")
+        
+        if name_keyword == "":
+            return render_template("score.html", name_keyword=name_keyword)
+        else:
+            scores = Score.query.filter(Score.name.like("%" + name_keyword + "%")).all()
+            return render_template("score.html", name_keyword=name_keyword, scores=scores)
 
 
 @app.route("/student", methods=["GET", "POST"])
