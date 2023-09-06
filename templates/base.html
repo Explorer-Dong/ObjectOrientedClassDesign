@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}三个数据表展示的模板页{% endblock %}</title>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <a href="{{ url_for('index')}}">主页</a>
+        <a href="{{ url_for('course') }}">课程表</a>
+        <a href="{{ url_for('student') }}">学生表</a>
+        <a href="{{ url_for('score') }}">分数表</a>
+    </header>
+    <!-- end header -->
+
+    <!-- main -->
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <!-- end main -->
+
+    <!-- footer -->
+    <footer>
+        <p>版权所有 © 2023 教务课设 by dwj</p>
+    </footer>
+    <!-- end footer -->
+</body>
+
+</html>
