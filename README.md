@@ -314,6 +314,7 @@ script部分
 
 class BaseModule(Blueprint):
     # 初始化：创建一个Blueprint对象
+    pass
     
     # 主页面 + 搜索功能方法实现
     
