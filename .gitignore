@@ -1,5 +1,4 @@
-/.idea
-/__pycache__
+.idea
+.venv
+**/__pycache__/
 /migrations
-/venv
-/blueprints/__pycache__
